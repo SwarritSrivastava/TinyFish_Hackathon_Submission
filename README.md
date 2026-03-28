@@ -1,54 +1,41 @@
-# LeadFish: Autonomous B2B Lead Generation Agent
+# 🚀 HireScan.ai
 
-LeadFish is a command-line application that automates the tedious process of B2B prospecting. It utilizes the [TinyFish Web Agent API](https://agent.tinyfish.ai/) to navigate company directories, extract target companies based on specific criteria, and scrape their individual websites for contact information and key decision-makers.
+**HireScan** is an autonomous, AI-driven SaaS platform designed to help technical recruiters and engineering teams automate the tedious process of discovering and evaluating developer portfolios at scale. Powered by the [TinyFish Web Agent API](https://agent.tinyfish.ai/), the application deploys intelligent web agents that navigate websites, read content, and extract structured data just like a human would.
 
-## Features
+## ✨ Key Features (Tri-Modal Architecture)
 
-- **Autonomous Navigation**: Provide a query, and LeadFish's agent navigates 'ycombinator.com/companies' to find matching startups.
-- **Deep Scraping**: Visits each startup's actual website.
-- **Data Extraction**: Extracts the company name, website URL, potential contact emails, founder names from the "About" page, and careers links.
-- **CSV Export**: Outputs all gathered intelligence into a clean, CRM-ready CSV file.
+1. **Discovery**: Programmatically searches the web to find relevant developer portfolios based on natural language role targeting (e.g., "Next.js Engineers in NY").
+2. **Evaluation (Batch CSV)**: Deep-scans individual portfolio URLs to extract key insights—such as the developer's name, their primary tech stack, links to their top projects, and a concise summary of what they build.
+3. **End-to-End Orchestration**: Seamlessly combines both discovery and evaluation into a single autonomous pipeline.
 
-## Setup
+## 🛠️ Built With
+- **Frontend**: Next.js (App Router), React, Tailwind CSS, Framer Motion
+- **Backend**: Node.js, TypeScript
+- **Agent Intelligence**: TinyFish API SDK (`@tiny-fish/sdk`)
 
-1. **Install Dependencies**
-   ```bash
-   npm install
-   ```
+## 🚦 Getting Started
 
-2. **Configure API Key**
-   Copy `.env.example` to `.env` and insert your TinyFish API key.
-   ```bash
-   cp .env.example .env
-   # Edit .env and supply your TINYFISH_API_KEY
-   ```
-
-3. **Run the tool**
-   ```bash
-   npm run start -- org-search --query "AI Healthcare" --limit 3
-   ```
-
-## Example Usage
-
+### 1. Install Dependencies
+Install dependencies for both the base orchestrator and the web app:
 ```bash
-$ npm run start -- org-search --query "Developer Tools" --limit 5
-
-🐟 LeadFish Agent Initialized
-Targeting: Developer Tools (Limit: 5)
-⠦ Initializing TinyFish Web Agent...
-⠧ Processing step... (Extracting company URLs)
-⠏ Live View: https://example.com/streaming-url-from-tinyfish
-✔ Successfully extracted 5 leads!
-
-Saved output to leads.csv
+npm install
+cd web && npm install
 ```
 
-## How It Works
+### 2. Configure Environment Variables
+Create your own `.env` configuration file and insert your TinyFish API key:
+```bash
+cp .env.example .env
+# Open .env and add: TINYFISH_API_KEY=your_api_key_here
+```
 
-Under the hood, LeadFish uses `@tiny-fish/sdk` to construct a multi-step goal for an autonomous web agent. The agent natively comprehends the instruction, navigates the web pages using a headless browser on TinyFish infrastructure, clicks links, and shapes the returned data into the strictly typed JSON format we enforce. No rigid CSS selectors needed!
+### 3. Run the Dashboard
+Start the Next.js development server from the `web` directory:
+```bash
+cd web
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser to access the HireScan Control Console.
 
-### Built With:
-- TypeScript / Node.js
-- `@tiny-fish/sdk`
-- Commander
-- json2csv
+## 💻 How It Works
+Under the hood, HireScan provisions a headless browser session on the TinyFish infrastructure. Based on your queries, it streams progress and live UI representations (via a streaming URL) directly to your Control Console. When evaluation is complete, the platform shapes the unstructured web data into a strictly typed, CRM-ready `.csv` output matrix for instant download. No manual scraping or rigid CSS selectors required!
