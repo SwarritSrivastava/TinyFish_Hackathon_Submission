@@ -1,0 +1,5 @@
+node_modules/
+.env
+dist/
+execution.log
+leads.csv
